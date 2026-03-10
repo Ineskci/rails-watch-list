@@ -1,11 +1,35 @@
-<div class="container">
-  <h1>My List</h1>
-  <ul>
-    <% @lists.each do |list| %>
-      <li><%= link_to list.name, list_path(list.id) %></li>
-    <% end %>
-  </ul>
-  <%= link_to 'Create a New List', new_list_path, class: 'btn btn-info' %>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c);">
+  <div class="container">
+    <h1>Save any kind of Movies!</h1>
+  </div>
 </div>
 
- 
+<div class="title_lists">
+  <h2>Here your movies selection:</h2>
+</div>
+
+<div class="container mt-5">
+  <div class="cards">
+    <% @lists.each do |list| %>
+      <%= link_to list_path(list) do %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= image_path "movie.png" %>)">
+          <%= list.name %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="create-list-section" id="create-list">
+  <div class="row justify-content-center">
+    <div class="col-4 border p-4">
+      <h2>It's time to create a new lists with your favorites movies</h2>
+      <%= simple_form_for @list do |f| %>
+        <%= f.input :name, required: false, placeholder: "Be creative..." %>
+        <div class="d-grid">
+          <%= f.submit "Add List", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
